@@ -5,7 +5,7 @@ using namespace std;
 
 /**
 Autor: Kamil Pek 231050
-Data: 10.10.2016
+Data: 16.10.2016
 */
 
 class szyfrcezara{
@@ -17,29 +17,30 @@ public:
 		ifstream plain ("plain.txt");
 		ifstream key ("key.txt");
 		if(key.is_open()){
-			key >> sc_klucz; }
+			key >> sc_klucz;
+			key.close(); }
 		else cout << "Nie mozna odczytac klucza.";
 		czyscplik();
 		if(plain.is_open()){
 			while(getline(plain, sc_tekst)){
 				string szyfr = szyfrowanie(sc_tekst, sc_klucz);
-				zapisdopliku(szyfr);
-				cout << szyfr << "\n";
-			}
-			plain.close();
-			key.close();
-		}
+				zapisdopliku(szyfr); }
+			plain.close(); }
 		else cout << "Nie mozna otworzyc pliku."; }
 
-		string szyfrowanie(string t, int k){
-			int d = sizeof t;
-			d--;
-			for(int i=0; i<d; i++){
-				int x = t[i];
-				// int wynik = (x+k)%26;
-				int wynik = x+5;
-				t[i] = (char)wynik;
-				string szyfr(t); }
+		string szyfrowanie(string &t, int k){
+			char a, z;
+			int d = t.size();
+			for(int i = 0; i < d; i++){
+				int w = wielkosc(t[i]);
+				if (w == 0) a = 'a', z = 'z';
+				else a = 'A', z = 'Z';
+				if(k >= 0){
+					if (t[i] + k <= z) t[i] += k;
+					else t[i] = t[i] + k - 26; }
+				else {
+					if (t[i] + k >= a) t[i] += k;
+					else t[i] = t[i] + k + 26; } }
 			return t;
 		}
 
@@ -51,23 +52,30 @@ public:
 			else cout << "Nie mozna przeprowadzic operacji na pliku.\n";
 		}
 
-		void zapisdopliku(string s){
-			ofstream crypto ("crypto.txt", ios::out|ios::app);
+		void zapisdopliku(string s){     // ios::app - dopisywanie do pliku
+			ofstream crypto ("crypto.txt", ios::app);
 			if(crypto.is_open()){
 				crypto << s << "\n";
 				crypto.close();	}
 			else cout << "Nie mozna zapisac do pliku.\n";
 		}
+
+		int wielkosc(char znak){
+			if(znak >= 'a' && znak <= 'z') return 0;
+			if(znak >= 'A' && znak <= 'Z') return 1;
+			else return 2; // pozostale znaki
+		}
 };
 
-int main(int argc, char * argv[]){
+int main(int argc, char * argv[]){	
 
-	szyfrcezara sc;
-
-	// switch ((*argv)[1]) {
-	// 	case "-c": 	szyfrcezara sc; break;
-	// 	default:  cout << "Prosze wybrac parametr.\n";
-	// }
+	if ( !strcmp(argv[1], "-c")) szyfrcezara sc;
+	else if ( !strcmp(argv[1], "-a")) cout << "Szyfr afiniczny.\n";
+	else if ( !strcmp(argv[1], "-e")) cout << "Szyfrowanie.\n";
+	else if ( !strcmp(argv[1], "-d")) cout << "Odszyfrowywanie.\n";
+	else if ( !strcmp(argv[1], "-j")) cout << "Kryptoanaliza z tekstem jawnym.\n";
+	else if ( !strcmp(argv[1], "-k")) cout << "Kryptoanaliza wyłącznie w oparciu o kryptogram.\n";
+	else cout << "Prosze podac parametr.\n";
 
 	return 0;
 }
