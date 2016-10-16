@@ -67,14 +67,15 @@ public:
 		}
 };
 
-int main(int argc, char * argv[]){	
+int main(int argc, char * argv[]){
 
-	if ( !strcmp(argv[1], "-c")) szyfrcezara sc;
-	else if ( !strcmp(argv[1], "-a")) cout << "Szyfr afiniczny.\n";
-	else if ( !strcmp(argv[1], "-e")) cout << "Szyfrowanie.\n";
-	else if ( !strcmp(argv[1], "-d")) cout << "Odszyfrowywanie.\n";
-	else if ( !strcmp(argv[1], "-j")) cout << "Kryptoanaliza z tekstem jawnym.\n";
-	else if ( !strcmp(argv[1], "-k")) cout << "Kryptoanaliza wyłącznie w oparciu o kryptogram.\n";
+	if ( !strcmp(argv[1], "-c")) cout << "Wybrano Szyfr Cezara.\n";
+	else if ( !strcmp(argv[1], "-a")) cout << "Wybrano Szyfr afiniczny.\n";
+
+	if ( !strcmp(argv[2], "-e")) cout << "Szyfrowanie.\n";
+	else if ( !strcmp(argv[2], "-d")) cout << "Odszyfrowywanie.\n";
+	else if ( !strcmp(argv[2], "-j")) cout << "Kryptoanaliza z tekstem jawnym.\n";
+	else if ( !strcmp(argv[2], "-k")) cout << "Kryptoanaliza wyłącznie w oparciu o kryptogram.\n";
 	else cout << "Prosze podac parametr.\n";
 
 	return 0;
