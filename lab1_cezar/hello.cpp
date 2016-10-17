@@ -100,8 +100,12 @@ public:
 				kryptoanaliza(cr_a, cr_b, pl_a, pl_b);
 				crypto.close(); } }
 		if(tryb == 4){
-			cout << "Szyfr Cesara - kryptoanaliza wylacznie w oparciu o kryptogram.\n";
-			cout << "Funkcja jeszcze nie gotowa.\n"; } }
+			ifstream crypto("crypto.txt");
+			string sc_tresc;
+			if(crypto.is_open()){
+				while(getline(crypto, sc_tresc)){
+					kryptoanaliza2(sc_tresc);
+					crypto.close();	}	}	}
 }
 
 		string szyfrowanie(string &t, int k){
@@ -146,6 +150,28 @@ public:
 						keynew.close();	}
 					else cout << "Nie mozna otworzyc pliku key-new.txt\n"; }
 				else cout << "Nie znaleziono klucza\n";
+			}
+
+			void kryptoanaliza2(string &t){						// do dopracowania
+				string slowa;
+				string tresc;
+				for(int i = 0; i < 25; i++){
+					tresc = deszyfrowanie(t, 3);
+					// cout << tresc << "\n";
+					const char* tr = tresc.c_str();
+					ifstream slownik("slowa1.txt");
+					if(slownik.is_open()){
+						while(getline(slownik, slowa)){
+							const char* sl = slowa.c_str();
+							if(strcmp(sl, tr)){
+								// cout << sl << "\t" << tr << "\n";
+								ofstream keynew("key-new.txt");
+								if(keynew.is_open()){
+									keynew << i;
+									keynew.close(); }
+								else cout << "Nie mozna obsluzyc pliku key-new.txt.\n"; }
+ 						} }
+					else cout << "Nie mozna otworzyc slownika.\n"; }
 			}
 };
 
