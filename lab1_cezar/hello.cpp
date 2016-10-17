@@ -9,6 +9,8 @@ Data: 16.10.2016
 */
 
 int klucz_a, klucz_b;
+string alfad = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+string alfam = "abcdefghijklmnopqrstuvwxyz";
 
 class pliki{
 public:
@@ -80,6 +82,16 @@ public:
 					string tresc = deszyfrowanie(sc_zaszyfr, sc_klucz);
 					obsluga.zapisz(tresc, 2); }
 				crypto.close(); }	}
+		if(tryb == 3){
+			ifstream crypto("crypto.txt");
+			ifstream extra("extra.txt");
+			char cr_a, cr_b, pl_a, pl_b;
+			if(crypto.is_open() && extra.is_open()){
+				crypto >> cr_a >> cr_b;
+				extra >> pl_a >> pl_b;
+				kryptoanaliza(cr_a, cr_b, pl_a, pl_b);
+				crypto.close(); }
+		 }
 }
 
 		string szyfrowanie(string &t, int k){
@@ -113,13 +125,23 @@ public:
 					else t[i] = t[i] - k - 26; } }
 				return t;
 			}
+
+			void kryptoanaliza(char cr_a, char cr_b, char pl_a, char pl_b){
+				int r1 = (int)cr_a - (int)pl_a;
+				int r2 = (int)cr_b - (int)pl_b;
+				if(r1 == r2){
+					ofstream keynew("key-new.txt");
+					if(keynew.is_open()){
+						keynew << r1;
+						keynew.close();	}
+					else cout << "Nie mozna otworzyc pliku key-new.txt\n"; }
+				else cout << "Nie znaleziono klucza\n";
+			}
 };
 
 class szyfrafiniczny{ 												// (a*x+b)%26
 public:
 	pliki obsluga;
-	string alfad = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	string alfam = "abcdefghijklmnopqrstuvwxyz";
 
 	szyfrafiniczny(int tryb){
 		int sa_klucz = obsluga.odczytklucza();
