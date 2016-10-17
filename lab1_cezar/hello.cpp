@@ -98,8 +98,10 @@ public:
 				crypto >> cr_a >> cr_b;
 				extra >> pl_a >> pl_b;
 				kryptoanaliza(cr_a, cr_b, pl_a, pl_b);
-				crypto.close(); }
-		 }
+				crypto.close(); } }
+		if(tryb == 4){
+			cout << "Szyfr Cesara - kryptoanaliza wylacznie w oparciu o kryptogram.\n";
+			cout << "Funkcja jeszcze nie gotowa.\n"; } }
 }
 
 		string szyfrowanie(string &t, int k){
@@ -171,6 +173,12 @@ public:
 					string sa_tresc = deszyfrowanie(sa_zaszyfr, sa_klucz);
 					obsluga.zapisz(sa_tresc, 2); }
 				crypto.close();	}	}
+		if(tryb == 3){
+			cout << "Szyfr Afiniczny - kryptoanaliza z tekstem jawnym.\n";
+			cout << "Funkcja jeszcze nie gotowa.\n"; }
+		if(tryb == 4){
+			cout << "Szyfr Afiniczny - kryptoanaliza wylacznie w oparciu o kryptogram.\n";
+			cout << "Funkcja jeszcze nie gotowa.\n"; }
 	}
 
 	string szyfrowanie(string &t, int k){
