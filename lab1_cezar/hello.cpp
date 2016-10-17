@@ -5,7 +5,7 @@ using namespace std;
 
 /**
 Autor: Kamil Pek 231050
-Data: 16.10.2016
+Data: 17.10.2016
 */
 
 int klucz_a, klucz_b;
