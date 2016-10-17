@@ -43,12 +43,19 @@ public:
 		return klucz_a;
 	}
 
-	void czyscplik(){
-		ofstream crypto ("crypto.txt");
-		if(crypto.is_open()){
-			crypto << "";
-			crypto.close();	}
-		else cout << "Nie mozna przeprowadzic operacji na pliku.\n";
+	void czyscplik(int tryb){
+		if(tryb == 1){
+			ofstream crypto ("crypto.txt");
+			if(crypto.is_open()){
+				crypto << "";
+				crypto.close();	}
+			else cout << "Nie mozna przeprowadzic operacji na pliku.\n"; }
+		if(tryb == 2){
+			ofstream decrypt ("decrypt.txt");
+			if(decrypt.is_open()){
+				decrypt << "";
+				decrypt.close();	}
+			else cout << "Nie mozna przeprowadzic operacji na pliku.\n"; }
 	}
 
 	int wielkosc(char znak){
@@ -68,7 +75,7 @@ public:
 		string sc_tekst;
 		string sc_zaszyfr;
 		if(tryb == 1){
-			obsluga.czyscplik();
+			obsluga.czyscplik(1);
 			ifstream plain("plain.txt");
 			if(plain.is_open()){
 				while(getline(plain, sc_tekst)){
@@ -76,6 +83,7 @@ public:
 					obsluga.zapisz(szyfr, 1); }
 				plain.close(); } }
 		if(tryb == 2){
+			obsluga.czyscplik(2);
 			ifstream crypto("crypto.txt");
 			if(crypto.is_open()){
 				while(getline(crypto, sc_zaszyfr)){
@@ -148,8 +156,7 @@ public:
 		string sa_tekst;
 		string sa_zaszyfr;
 		if(tryb == 1){
-			// cout << klucz_a << "\t" << klucz_b;
-			obsluga.czyscplik();
+			obsluga.czyscplik(1);
 			ifstream plain("plain.txt");
 			if(plain.is_open()){
 				while(getline(plain, sa_tekst)){
@@ -157,6 +164,7 @@ public:
 					obsluga.zapisz(sa_szyfr, 1); }
 				plain.close(); }	}
 		if(tryb == 2){
+			obsluga.czyscplik(2);
 			ifstream crypto("crypto.txt");
 			if(crypto.is_open()){
 				while(getline(crypto, sa_zaszyfr)){
