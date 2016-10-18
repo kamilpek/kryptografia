@@ -142,19 +142,20 @@ public:
 				else cout << "Nie znaleziono klucza\n";
 			}
 
-			void kryptoanaliza2(string &t){
+			void kryptoanaliza2(string &t){				// do poprawy
 				string slowa;
 				string tresc;
 				int test;
 				for(int i = 0; i < 25; i++){
 					tresc = deszyfrowanie(t, i);
+					cout << tresc << "\t" << i << "\n";
 					const char* tr = tresc.c_str();
 					ifstream slownik("slowa1.txt");
 					if(slownik.is_open()){
 						while(getline(slownik, slowa)){
 							const char* sl = slowa.c_str();
 							test = strcmp(sl, tr);
-							cout << sl << " " << tr << " " << i << " " << test << "\n";
+							// cout << sl << " " << tr << " " << i << " " << test << "\n";
 							if((strcmp(sl, tr)) == 0){
 								cout << sl << " " << tr << " " << i << "\n";
 								ofstream keynew("key-new.txt");
