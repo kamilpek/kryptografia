@@ -108,36 +108,26 @@ public:
 					crypto.close();	}	}	}
 }
 
-		string szyfrowanie(string &t, int k){
-			char a, z;
-			int d = t.size();
-			for(int i = 0; i < d; i++){
-				int w = obsluga.wielkosc(t[i]);
-				if(w == 0) a = 'a', z = 'z';
-				else a = 'A', z = 'Z';
-				if(k >= 0){
-					if(t[i] + k <= z) t[i] += k;
-					else t[i] = t[i] + k - 26; }
-				else {
-					if(t[i] + k >= a) t[i] += k;
-					else t[i] = t[i] + k + 26; } }
-			return t;
+		string szyfrowanie(string &text, int shift){
+			int d = text.size();
+			for(int i = 0; i < d; i++) {
+	        if(text[i] >= 'A' && text[i] <= 'Z')
+	            text[i] = (text[i] + shift > 'Z') ? (text[i] + shift) - 26 : (text[i] + shift);
+	        else if(text[i] >= 'a' && text[i] <= 'z')
+	            text[i] = (text[i] + shift > 'z') ? (text[i] + shift) - 26 : (text[i] + shift);
+	    }
+			return text;
 		}
 
-		string deszyfrowanie(string &t, int k){
-			char a, z;
-			int d = t.size();
-			for(int i = 0; i < d; i++){
-				int w = obsluga.wielkosc(t[i]);
-				if(w == 0) a = 'a', z = 'z';
-				else a = 'A', z = 'Z';
-				if(k >= 0){
-					if(t[i] - k <= z) t[i] -= k;
-					else t[i] = t[i] - k + 26; }
-				else {
-					if(t[i] - k >= a) t[i] -= k;
-					else t[i] = t[i] - k - 26; } }
-				return t;
+		string deszyfrowanie(string &text, int shift){
+			int d = text.size();
+			for(int i = 0; i < d; i++) {
+			        if(text[i] >= 'A' && text[i] <= 'Z')
+			            text[i] = (text[i] - shift < 'A') ? (text[i] - shift) + 26 : (text[i] - shift);
+			        else if(text[i] >= 'a' && text[i] <= 'z')
+			            text[i] = (text[i] - shift < 'a') ? (text[i] - shift) + 26 : (text[i] - shift);
+			    }
+				return text;
 			}
 
 			void kryptoanaliza(char cr_a, char cr_b, char pl_a, char pl_b){
