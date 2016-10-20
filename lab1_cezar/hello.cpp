@@ -4,8 +4,8 @@
 using namespace std;
 
 /**
-Autor: Kamil Pek 231050
-Data: 17.10.2016
+Kamil Pek 231050
+20.10.2016
 */
 
 int klucz_a, klucz_b;
@@ -25,7 +25,6 @@ public:
 			else cout << "Nie mozna zapisac do pliku.\n";	}
 		else if(tryb == 2){
 			if(decrypt.is_open()){
-				// cout << "elo";
 				decrypt << s << "\n";
 				decrypt.close(); }
 			else cout << "Nie mozna zapisac do pliku.\n";	}
@@ -142,20 +141,16 @@ public:
 				else cout << "Nie znaleziono klucza\n";
 			}
 
-			void kryptoanaliza2(string &t){				// do poprawy
+			void kryptoanaliza2(string &t){
 				string slowa;
 				string tresc;
-				int test;
 				for(int i = 0; i < 25; i++){
 					tresc = deszyfrowanie(t, i);
-					cout << tresc << "\t" << i << "\n";
 					const char* tr = tresc.c_str();
 					ifstream slownik("slowa1.txt");
 					if(slownik.is_open()){
 						while(getline(slownik, slowa)){
 							const char* sl = slowa.c_str();
-							test = strcmp(sl, tr);
-							// cout << sl << " " << tr << " " << i << " " << test << "\n";
 							if((strcmp(sl, tr)) == 0){
 								cout << sl << " " << tr << " " << i << "\n";
 								ofstream keynew("key-new.txt");
@@ -201,12 +196,8 @@ public:
 	}
 
 	string szyfrowanie(string &t, int k){
-		char a, z;
 		int d = t.size();
 		for(int i = 0; i < d; i++){
-			int w = obsluga.wielkosc(t[i]);
-			if(w == 0) a = 'a', z = 'z';
-			else a = 'A', z = 'Z';
 			int e = (int)t[i];
 			int v = ((klucz_a*e)+klucz_b)%26;
 			t[i] = alfam[v]; }
@@ -214,20 +205,16 @@ public:
 	}
 
 	string deszyfrowanie(string &t, int k){
-		char a, z;
 		int d = t.size();
 		int mv = mul_inv(klucz_a, klucz_b);
 		for(int i = 0; i < d; i++){
-			int w = obsluga.wielkosc(t[i]);
-			if(w == 0) a = 'a', z = 'z';
-			else a = 'A', z = 'Z';
 			int e = (int)t[i];
 			int v = (mv*(e - klucz_b))%26;
 			t[i] = alfam[v]; }
 		return t;
 	}
 
-	int mul_inv(int a, int b){
+	int mul_inv(int a, int b){					// odwrotnosc modulo
 		int b0 = b, t, q;
 		int x0 = 0, x1 = 1;
 		if (b == 1) return 1;
