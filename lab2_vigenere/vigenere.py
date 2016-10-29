@@ -2,7 +2,7 @@ import sys
 
 ciphertext = ""
 plaintext = ""
-key = [6,1,8,0,3,3,9,8,8,7,4]
+# key = [6,1,8,0,3,3,9,8,8,7,4]
 
 def crypto(plain, key):
     if(plain == None or key == None):
@@ -40,17 +40,27 @@ def prettifyString(inp, text):
     text += str("\n")
     return text
 
+def getkey():
+    key = []
+    i = 0
+    gkey = open("key.txt", "r")
+    for (line, i) in gkey:
+        line = line.replace("\n", "")
+        key.append(int(line))
+    return key
+
 def main():
 
     if sys.argv[1] == "-e":
         i = 0
         plain = open("plain.txt", "r")
         cryptow = open("crypto.txt", "w")
+        ekey = getkey()
         for line in plain:
             for c in line:
-                i = i%len(key)
-                # tcr = prettifyString(map(crypto, line, key), plaintext)
-                tcr = crypto(c, key[i])
+                i = i%len(ekey)
+                # tcr = prettifyString(map(crypto, line, ekey), plaintext)
+                tcr = crypto(c, ekey[i])
                 cryptow.write(tcr)
         plain.close()
         cryptow.close()
@@ -58,11 +68,12 @@ def main():
         i = 0
         cryptor = open("crypto.txt", "r+")
         decrypt = open("decrypt.txt", "w")
+        dkey = getkey()
         for line in cryptor:
             for c in line:
-                i = i%len(key)
-                # tdc = prettifyString(map(decrypto, line, key), ciphertext)
-                tdc = decrypto(c, key[i])
+                i = i%len(dkey)
+                # tdc = prettifyString(map(decrypto, line, dkey), ciphertext)
+                tdc = decrypto(c, dkey[i])
                 decrypt.write(tdc)
         cryptor.close()
         decrypt.close()
