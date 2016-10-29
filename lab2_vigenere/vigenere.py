@@ -43,19 +43,27 @@ def prettifyString(inp, text):
 def main():
 
     if sys.argv[1] == "-e":
+        i = 0
         plain = open("plain.txt", "r")
         cryptow = open("crypto.txt", "w")
         for line in plain:
-            tcr = prettifyString(map(crypto, line, key), plaintext)
-            cryptow.write(tcr)
+            for c in line:
+                i = i%len(key)
+                # tcr = prettifyString(map(crypto, line, key), plaintext)
+                tcr = crypto(c, key[i])
+                cryptow.write(tcr)
         plain.close()
         cryptow.close()
     elif sys.argv[1] == "-d":
+        i = 0
         cryptor = open("crypto.txt", "r+")
         decrypt = open("decrypt.txt", "w")
         for line in cryptor:
-            tdc = prettifyString(map(decrypto, line, key), ciphertext)
-            decrypt.write(tdc)
+            for c in line:
+                i = i%len(key)
+                # tdc = prettifyString(map(decrypto, line, key), ciphertext)
+                tdc = decrypto(c, key[i])
+                decrypt.write(tdc)
         cryptor.close()
         decrypt.close()
     elif sys.argv[1] == "-p":
