@@ -43,10 +43,14 @@ def prettifyString(inp, text):
 def getkey():
     key = []
     i = 0
+    ach = 0
     gkey = open("key.txt", "r")
-    for (line, i) in gkey:
-        line = line.replace("\n", "")
-        key.append(int(line))
+    for line in gkey:
+        for ch in line:
+            ach = ord(ch)
+            ach = ach%26
+            key.append(ach)
+    key.remove(10)
     return key
 
 def main():
