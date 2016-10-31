@@ -122,6 +122,7 @@ def get_solution_from_individuals(individuals):
 
 
 def analyze(data, key_size):
+    print("Przeprowadzam kryptoanalize, prosze czekac...")
     key = [random.choice(string.ascii_lowercase) for _ in range(key_size)]
     while True:
         individuals = generate_individuals(data, key)
@@ -129,12 +130,15 @@ def analyze(data, key_size):
         if "".join(key) == "".join(solution.new_key):
             break
         key = solution.new_key
-        print('Key=%s\t\tFitness=%d' % ("".join(key), solution.fitness))
+        # print('Klucz= %s\t\tFitness=%d' % ("".join(key), solution.fitness))
 
-    print("")
-    print("Key=%s" % "".join(key))
-    print(decrypt_ca("".join(key), data))
+    newkey("".join(key))
+    print("Gotowe. Wynik w pliku key-crypto.txt.")
 
+def newkey(key):
+    nkey = open("key-crypto.txt", "w")
+    nkey.write(key)
+    nkey.close
 
 def getkey():
     key = []
