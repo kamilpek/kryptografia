@@ -84,6 +84,7 @@ def prepare():
         text = text.replace("<", "")
         text = text.replace(">", "")
         text = text.replace("|", "")
+        text = text.replace("\n", "")
         plain.write(text)
 
 class VigenereIndividual:

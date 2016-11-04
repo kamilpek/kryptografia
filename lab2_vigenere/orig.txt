@@ -1,1 +1,10 @@
-your essay must include a brief definition of the type of problem being solved by the swarm intelligence algorithm as well as discussing how a candidate solution is represented by a particle in the case of pso or an ant in the case of aco and how the evaluation of a candidate solution is computed by a fitness quality function. in the case of aco using a local heuristic function, this should be discussed too. your essay must also discuss the strengths and weaknesses of the discussed types of swarm intelligence algorithms in the context of the application or type of problems addressed in your essay. note that there is no need to explain, in this short essay, concepts or applications that were already explained in the lectures.
+Shannon loves basketball. She loves everything about basketball. Shannon always looks forward to basketball practice. She enjoys the workout. She enjoys the competition. She enjoys the time with her teammates.
+Coach always starts practice the same way. They run ten laps around the gym and then stretch out. They then practice shots. (Shannon usually sinks most of hers!)
+Then the coach introduces new drills. Then they practice the plays they use in games.
+Shannon concentrates and does her best. She works hard, and her teammates appreciate her for it. She always has a positive attitude and encourages her teammates to work harder and do their best.
+But today, Shannon twists her ankle and falls down. She cries out in pain, which is unusual for Shannon. She rarely cries. Everyone rushes over to see if she is okay.
+One of her teammates runs to get ice for her ankle. (Ice helps with the swelling.) The others help her off the court and she sits down to rest.
+The coach asks Shannon if she is okay. She says, "I am fine. Ankles heal."
+The coach shakes her head. "Shannon," she says, "As usual, I am impressed with your attitude and team spirit. In honor of Shannon, we should all go get ice cream!"
+So, the whole team climbs aboard the school bus and the coach takes them all out for ice cream.
+As she licks her mint chocolate chip ice cream cone, Shannon says, "Today, I love basketball practice more than ever!"
