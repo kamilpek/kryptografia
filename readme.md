@@ -8,7 +8,7 @@ Szyfr Cezara i Szyfr Afiniczny.
 Szyfr Viegenera.
 [Zadanie]( https://github.com/kamilpek/kryptografia/tree/master/lab2_vigenere/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/tree/master/lab2_vigenere)
 
-##Laboratorium 3. 23.10.2016
+##Laboratorium 3. 06.11.2016
 Błędne powtórzenie klucza jednorazowego.
 [Zadanie](https://github.com/kamilpek/kryptografia/blob/master/lab3_kluczjednorazowy/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab3_kluczjednorazowy/)
 
