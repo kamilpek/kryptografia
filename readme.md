@@ -15,3 +15,7 @@ Błędne powtórzenie klucza jednorazowego.
 ##Laboratorium 4. 20.11.2016
 Funkcje skrótu.
 [Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab4_funkcjeskrotu/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab4_funkcjeskrotu/)
+
+##Laboratorium 5. 27.11.2016
+Tryby szyfrów blokowych.
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab5_blokowe/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab5_blokowe/)
