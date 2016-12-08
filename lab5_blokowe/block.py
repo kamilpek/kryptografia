@@ -3,6 +3,7 @@
 # 05.12.201
 
 from PIL import Image
+import hashlib
 
 if __name__ == '__main__':
     img = Image.open("plain.bmp")
@@ -30,7 +31,7 @@ if __name__ == '__main__':
             pixels[i,j] = (pix1, pix2, pix3) # set the colour accordingly
             # pixels[i,j] = (pixa1, pixa2, pixa3) # set the colour accordingly
             # pixels[i,j] = (pixb1, pixb2, pixb3) # set the colour accordingly
-            pixels[i,j] = hash(pixels[i,j])
+            # pixels[i,j] = hash(pixels[i,j])
 
     img.show()
     img.save("example.bmp")
