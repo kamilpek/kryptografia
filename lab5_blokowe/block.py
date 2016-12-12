@@ -3,7 +3,7 @@
 # python block.py
 
 import binascii, os.path, urllib, random
-# from PIL import Image
+from PIL import Image
 import commands
 
 class cbcPenguin(object):
