@@ -19,3 +19,7 @@ Funkcje skrótu.
 ##Laboratorium 5. 27.11.2016
 Tryby szyfrów blokowych.
 [Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab5_blokowe/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab5_blokowe/)
+
+##Laboratorium 6. 11.12.2016
+Algorytm Euklidesa i chińskie twierdzenie o resztach.
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab6_ctr/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab6_ctr/)
