@@ -23,3 +23,11 @@ Tryby szyfrów blokowych.
 ##Laboratorium 6. 11.12.2016
 Algorytm Euklidesa i chińskie twierdzenie o resztach.
 [Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab6_ctr/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab6_ctr/)
+
+##Laboratorium 7. 18.12.2016
+System ElGamala
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab7_elgamal/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab7_elgamal/)
+
+##Laboratorium 8. 18.12.2016
+Test Rabina-Millera
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab8_rabin-miler/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab8_rabin-miler/)
