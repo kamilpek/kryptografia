@@ -24,6 +24,17 @@ def gcd( a, b ):
 def modexp( base, exp, modulus ):
 		return pow(base, exp, modulus)
 
+def mul_inv(a, b):
+	    b0 = b
+	    x0, x1 = 0, 1
+	    if b == 1: return 1
+	    while a > 1:
+	        q = a / b
+	        a, b = b, a%b
+	        x0, x1 = x1 - q * x0, x0
+	    if x1 < 0: x1 += b0
+	    return x1
+
 def SS( num, iConfidence ):
 		for i in range(iConfidence):
 				a = random.randint( 1, num-1 )
@@ -138,6 +149,21 @@ def decrypt(keyp, keyx, cipher):
 		decryptedText = "".join([ch for ch in decryptedText if ch != '\x00'])
 		return decryptedText
 
+def siggen(p, g, x, m):
+		while 1:
+			k = random.randint(1,p-2)
+			if gcd(k,p-1)==1: break
+		r = pow(g,k,p)
+		l = mul_inv(k, p-1)
+		s = l*(m-x*r)%(p-1)
+		return r,s
+
+def sigver(p, a, y, r, s, m):
+		if r < 1 or r > p-1 : return False
+		v1 = pow(y,r,p)%p * pow(r,s,p)%p
+		v2 = pow(a,m,p)
+		return v1 == v2
+
 def test():
 		assert (sys.version_info >= (3,4))
 		keys = generate_keys()
@@ -195,9 +221,9 @@ def main():
 			ecrypt = open("crypto.txt", "r")
 			for line in ecrypt:
 				cipher = str(line)
-			decrypted = decrypt(privkp, privkx, cipher)
+			decrypted = u' '.join((decrypt(privkp, privkx, cipher))).encode('utf-8').strip()
 			edecrypt = open("decrypt.txt", "w")
-			edecrypt.write('%s' % (str(decrypted)))
+			edecrypt.write('%s' % (decrypted))
 
 		if sys.argv[1] == "-s":
 			index = 0
@@ -208,7 +234,32 @@ def main():
 				if index == 2: privkx = int(line)
 				index = index + 1
 			message = open("message.txt", "r")
-			k = random.randint( 1, privkp-1 )
-			if gcd( k, privkp ) == 1: r = modexp(privkg, k, privkp)
-			
+			for line in message:
+				content = int(line)
+			rr, ss = siggen(privkp, privkg, privkx, content)
+			signature = open("signature.txt", "w")
+			signature.write('%s\n%s' % (str(rr), str(ss)))
+
+		if sys.argv[1] == "-v":
+			index = 0
+			signature = open("signature.txt", "r")
+			for line in signature:
+				if index == 0: sigr = int(line)
+				if index == 1: sigs = int(line)
+				index = index + 1
+			message = open("message.txt", "r")
+			for line in message:
+				content = int(line)
+			index = 0
+			epub = open("public.txt", "r")
+			for line in epub:
+				if index == 0: pubkp = int(line)
+				if index == 1: pubkg = int(line)
+				if index == 2: pubky = int(line)
+				index = index + 1
+			isvalid = sigver(pubkp, pubkg, pubky, sigr, sigs, content)
+			verify = open("verify.txt", "w")
+			verify.write('Weryfikacja: %s' % isvalid)
+			print("Weryfikacja: %s" % isvalid)
+
 main()
