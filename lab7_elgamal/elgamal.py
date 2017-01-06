@@ -119,13 +119,13 @@ def generate_keys(iNumBits=256, iConfidence=32):
 		privateKey = PrivateKey(p, g, x, iNumBits)
 		return {'privateKey': privateKey, 'publicKey': publicKey}
 
-def encrypt(key, sPlaintext):
-		z = encode(sPlaintext, key.iNumBits)
+def encrypt(p, g, x, h, iNumBits, sPlaintext):
+		z = encode(sPlaintext, iNumBits)
 		cipher_pairs = []
 		for i in z:
-				y = random.randint( 0, key.p )
-				c = modexp( key.g, y, key.p )
-				d = (i*modexp( key.h, y, key.p)) % key.p
+				y = random.randint( 0, p )
+				c = modexp( g, y, p )
+				d = (i*modexp( h, y, p)) % p
 				cipher_pairs.append( [c, d] )
 
 		encryptedStr = ""
@@ -199,15 +199,22 @@ def main():
 
 		if sys.argv[1] == "-e":
 			index = 0
-			eplain = open("plain.txt", "r")
 			epub = open("public.txt", "r")
 			for line in epub:
-				if index == 2: pubk = int(line)
+				if index == 2: pubkh = int(line)
 				index = index + 1
-			keys = generate_keys()
-			pub = keys['publicKey']
-			message = str(eplain)
-			cipher = encrypt(pub, message)
+			index = 0
+			epriv = open("private.txt", "r")
+			for line in epriv:
+				if index == 0: privkp = int(line)
+				if index == 1: privkg = int(line)
+				if index == 2: privkx = int(line)
+				index = index + 1
+			iNumBits = 256
+			eplain = open("plain.txt", "r")
+			for line in eplain:
+				message = str(line)
+			cipher = encrypt(privkp, privkg, privkx, pubkh, iNumBits, message)
 			ecrypto = open("crypto.txt", "w")
 			ecrypto.write('%s' % (str(cipher)))
 
@@ -221,7 +228,7 @@ def main():
 			ecrypt = open("crypto.txt", "r")
 			for line in ecrypt:
 				cipher = str(line)
-			decrypted = u' '.join((decrypt(privkp, privkx, cipher))).encode('utf-8').strip()
+			decrypted = u''.join((decrypt(privkp, privkx, cipher))).encode('utf-8').strip()
 			edecrypt = open("decrypt.txt", "w")
 			edecrypt.write('%s' % (decrypted))
 
