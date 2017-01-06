@@ -1,20 +1,12 @@
+# Kamil Pek 231050
+# 06.01.2017
+# python elgamal.py
+# -g generowanie liczby pierwszej i generatora, -k generowanie pary kluczy
+# -e szyfrowanie, -d deszyfrowanie, -s podpisywanie, -v werfyikacja
+
 import random
 import math
 import sys
-
-class PrivateKey(object):
-	def __init__(self, p=None, g=None, x=None, iNumBits=0):
-		self.p = p
-		self.g = g
-		self.x = x
-		self.iNumBits = iNumBits
-
-class PublicKey(object):
-	def __init__(self, p=None, g=None, h=None, iNumBits=0):
-		self.p = p
-		self.g = g
-		self.h = h
-		self.iNumBits = iNumBits
 
 def gcd( a, b ):
 		if b != 0:
