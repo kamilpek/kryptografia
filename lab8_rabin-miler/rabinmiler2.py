@@ -1,3 +1,5 @@
+import sys
+
 def _try_composite(a, d, n, s):
     if pow(a, d, n) == 1:
         return False
@@ -36,6 +38,13 @@ def is_prime(n, _precision_for_huge_n=16):
 _known_primes = [2, 3]
 _known_primes += [x for x in range(5, 1000, 2) if is_prime(x)]
 
+def fermat_test(n):
+	if n == 2:
+		return True
+	if not n & 1:
+		return False
+	return pow(2, n-1, n) == 1
+
 def main():
     index = 0
     input = open("wejscie.txt", "r")
@@ -45,13 +54,19 @@ def main():
         if index == 2: exp = int(line)
         index = index + 1
 
-    result = is_prime(num)
-
-    if result == True:
-        print("prawdopodbnie pierwsza")
-        print(num)
+    if len(sys.argv) < 2:
+        prime = is_prime(num)
+        if prime == True:
+            print("Rabin-Miler: \nprawdopodbnie pierwsza.")
+        else:
+            print("Rabin-Miler: \nna pewno zlozona.")
     else:
-        print("na pewno zlozona")
-        print(num)
+        if sys.argv[1] == "-f":
+            fer = fermat_test(num)
+            if fer == True:
+                print("Test Fermata: \nprawdopodbnie pierwsza.")
+            else:
+                print("Test Fermata: \nna pewno zlozona.")
+        else: print("")
 
 main()

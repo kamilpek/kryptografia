@@ -1,4 +1,5 @@
 import random
+import sys
 
 _mrpt_num_trials = 5 # number of bases to test
 
@@ -38,6 +39,13 @@ def is_probable_prime(n):
 
     return True # no base tested showed n as composite
 
+def fermat_test(n):
+	if n == 2:
+		return True
+	if not n & 1:
+		return False
+	return pow(2, n-1, n) == 1
+
 def main():
     index = 0
     input = open("wejscie.txt", "r")
@@ -47,13 +55,19 @@ def main():
         if index == 2: exp = int(line)
         index = index + 1
 
-    result = is_probable_prime(num)
-
-    if result == True:
-        print("prawdopodbnie pierwsza")
-        print(num)
+    if len(sys.argv) < 2:
+        prime = is_probable_prime(num)
+        if prime == True:
+            print("Rabin-Miler: \nprawdopodbnie pierwsza.")
+        else:
+            print("Rabin-Miler: \nna pewno zlozona.")
     else:
-        print("na pewno zlozona")
-        print(num)
+        if sys.argv[1] == "-f":
+            fer = fermat_test(num)
+            if fer == True:
+                print("Test Fermata: \nprawdopodbnie pierwsza.")
+            else:
+                print("Test Fermata: \nna pewno zlozona.")
+        else: print("")
 
 main()
