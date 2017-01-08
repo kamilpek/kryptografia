@@ -1,73 +1,136 @@
-import random
 import sys
+import random
+from fractions import gcd
 
-_mrpt_num_trials = 5 # number of bases to test
-
-def is_probable_prime(n):
-    assert n >= 2
-    # special case 2
-    if n == 2:
-        return True
-    # ensure n is odd
-    if n % 2 == 0:
-        return False
-    # write n-1 as 2**s * d
-    # repeatedly try to divide n-1 by 2
-    s = 0
-    d = n-1
-    while True:
-        quotient, remainder = divmod(d, 2)
-        if remainder == 1:
-            break
-        s += 1
-        d = quotient
-    assert(2**s * d == n-1)
-
-    # test the base a to see whether it is a witness for the compositeness of n
-    def try_composite(a):
-        if pow(a, d, n) == 1:
-            return False
-        for i in range(s):
-            if pow(a, 2**i * d, n) == n-1:
-                return False
-        return True # n is definitely composite
-
-    for i in range(_mrpt_num_trials):
-        a = random.randrange(2, n)
-        if try_composite(a):
-            return False
-
-    return True # no base tested showed n as composite
-
-def fermat_test(n):
-	if n == 2:
-		return True
-	if not n & 1:
-		return False
-	return pow(2, n-1, n) == 1
+def gcd( a, b ):
+		if b != 0:
+				return gcd( b, a % b )
+		return a
 
 def main():
-    index = 0
-    input = open("wejscie.txt", "r")
-    for line in input:
-        if index == 0: num = int(line)
-        if index == 1: pro = int(line)
-        if index == 2: exp = int(line)
-        index = index + 1
+    inout_file = open("wejscie.txt", "r")
+    output_file = open("wyjscie.txt", "w")
+    number1 = inout_file.readline()
+    number2 = inout_file.readline()
+    number3 = inout_file.readline()
+    if number1 != "":
+        number1 = long(number1)
+    if number2 != "":
+        number2 = long(number2)
+    if number3 != "":
+        number3 = long(number3)
 
-    if len(sys.argv) < 2:
-        prime = is_probable_prime(num)
-        if prime == True:
-            print("Rabin-Miler: \nprawdopodbnie pierwsza.")
-        else:
-            print("Rabin-Miler: \nna pewno zlozona.")
-    else:
+    if len(sys.argv)>1:
         if sys.argv[1] == "-f":
-            fer = fermat_test(num)
-            if fer == True:
-                print("Test Fermata: \nprawdopodbnie pierwsza.")
-            else:
-                print("Test Fermata: \nna pewno zlozona.")
-        else: print("")
+            k = 0
+            b_before = 0
+            a = random.randint(2, number1-1)
+            m = number1 - 1
+            bj = pow(a, m, number1)
+            if bj != 1:
+                output_file.write("prawdopodobnie zlozona")
+                exit()
+            output_file.write("brak pewnosci, dla a =" + str(a))
+        else:
+            print "Nieprawidlowy paramter."
+    else:
+        if number3:
+            number2 = (number2*number3)-1
+            for i in range(0, 40):
+                k = 0
+                b_before = 0
+                first = True
+                a = random.randint(2, number1-1)
+                if gcd(a, number1) != 1:
+                    ret = gcd(a, number1)
+                    output_file.write(str(ret))
+                    exit()
+                m = number2
+                while m % 2 != 1:
+                    k += 1
+                    m /= 2
+                bj = pow(a, m, number1)
+
+                if bj == 1 | bj == number1-1:
+                    continue
+                for j in range(0, k):
+                    bj_before = bj
+                    bj = pow(bj, 2, number1)
+                    if bj == 1 & first:
+                        b_before = bj_before
+                        first = False
+                        break
+                ret = gcd(b_before-1, number1)
+                if ret != 1:
+                    output_file.write(str(ret))
+                    exit()
+            output_file.write("prawdopodobnie pierwsza")
+        elif number2:
+            for i in range(0, 40):
+                k = 0
+                b_before = 0
+                first = True
+                a = random.randint(2, number1-1)
+                if gcd(a, number1) != 1:
+                    ret = gcd(a, number1)
+                    output_file.write(str(ret))
+                    exit()
+                m = number2
+                while m % 2 != 1:
+                    k += 1
+                    m /= 2
+                bj = pow(a, m, number1)
+                if bj != 1:
+                    output_file.write("liczba r:" + str(number2) + " nie jest wykladnikiem uniwersalnym: (" + str(a) + "^" + str(number2) + ") mod " + str(number1) + " = " + str(bj))
+                    exit()
+                if bj == 1 | bj == number1-1:
+                    continue
+                for j in range(0, k):
+                    bj_before = bj
+                    bj = pow(bj, 2, number1)
+                    if bj == 1 & first:
+                        b_before = bj_before
+                        first = False
+                        break
+                ret = gcd(b_before-1, number1)
+                if ret != 1:
+                    output_file.write(str(ret))
+                    exit()
+            output_file.write("prawdopodobnie pierwsza")
+        elif number1:
+            for i in range(0, 40):
+                k = 0
+                b_before = 0
+                first = True
+                a = random.randint(2, number1-1)
+                if gcd(a, number1) != 1:
+                    ret = gcd(a, number1)
+                    output_file.write(str(ret))
+                    exit()
+                m = number1 - 1
+                while m % 2 != 1:
+                    k += 1
+                    m /= 2
+                bj = pow(a, m, number1)
+                if bj == 1 | bj == number1-1:
+                    continue
+                for j in range(0, k):
+                    bj_before = bj
+                    bj = pow(bj, 2, number1)
+                    if bj == 1 & first:
+                        b_before = bj_before
+                        first = False
+                        break
+                if bj != 1:
+                    output_file.write("na pewno zlozona")
+                    exit()
+                else:
+                    if (b_before-number1) != -1:
+                        ret = gcd(b_before-1, number1)
+                        output_file.write(str(ret))
+                        exit()
+            output_file.write("prawdopodobnie pierwsza")
+        else:
+            print "Brak pliku wejscie.txt"
 
 main()
