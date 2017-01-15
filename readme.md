@@ -31,3 +31,7 @@ System ElGamala
 ##Laboratorium 8. 18.12.2016
 Test Rabina-Millera
 [Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab8_rabin-miler/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab8_rabin-miler/)
+
+##Laboratorium 9. 15.01.2017
+Pretty Good Privacy (PGP)
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/)
