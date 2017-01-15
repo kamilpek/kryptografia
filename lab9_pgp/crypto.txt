@@ -1,0 +1,7 @@
+klucz 4DB19F11: zaimportowano klucz publiczny ,,Tadeusz Żeleński (Boy) <tzb@ziemianska.pl>''
+Ogółem przetworzonych kluczy: 1
+             dołączono do zbioru: 1
+
+klucz 484452D4: zaimportowano klucz publiczny ,,Andrzej Borzyszkowski (laboratorium z kryptografii) <a.borzyszkowski@inf.ug.edu.pl>''
+Ogółem przetworzonych kluczy: 1
+              dołączono do zbioru: 1
