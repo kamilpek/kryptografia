@@ -34,4 +34,9 @@ Test Rabina-Millera
 
 ##Laboratorium 9. 15.01.2017
 Pretty Good Privacy (PGP)
-[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/zadanie.md) [Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/)
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/zadanie.md)
+[Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab9_pgp/)
+
+OpenSSL
+[Zadanie]( https://github.com/kamilpek/kryptografia/blob/master/lab9_openssl/zadanie.md)
+[Rozwiązanie](https://github.com/kamilpek/kryptografia/blob/master/lab9_openssl/)
